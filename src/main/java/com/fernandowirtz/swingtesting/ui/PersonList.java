@@ -82,6 +82,7 @@ public class PersonList extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, gridBagConstraints);
 
         btnReport.setText("Generate Report");
+        btnReport.setName("ReportButton"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;

@@ -45,7 +45,14 @@ public class PersonListTest {
         window = new FrameFixture(frame);
         window.show(); // shows the frame to test
     }
-
+    
+    @AfterEach
+    public void tearDown() {
+        if (Objects.nonNull(window)) {
+            window.cleanUp();
+        }
+    }
+    
     @Test
     public void requireGenerateReportButtonInitiallyDisabled() {
         window.button(JButtonMatcher.withText("Generate Report")).requireDisabled();
@@ -74,9 +81,9 @@ public class PersonListTest {
             app.setPersons(persons);
         });
 
-        window.button(JButtonMatcher.withText("Generate Report")).requireDisabled();
+        window.button("ReportButton").requireDisabled();
         window.list().selectItem(0);
-        window.button(JButtonMatcher.withText("Generate Report")).requireEnabled();
+        window.button("ReportButton").requireEnabled();
         window.list().clearSelection();
         window.button(JButtonMatcher.withText("Generate Report")).requireDisabled();
     }
@@ -95,12 +102,5 @@ public class PersonListTest {
         window.label("lblSelectedPerson").requireText("Gon (gon@gmail.com)");
         window.list().clearSelection();
         window.label("lblSelectedPerson").requireText("None selected");
-    }
-
-    @AfterEach
-    public void tearDown() {
-        if (Objects.nonNull(window)) {
-            window.cleanUp();
-        }
     }
 }
